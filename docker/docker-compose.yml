@@ -4,7 +4,7 @@ services:
   # PraisonAI UI Service
   ui:
     build:
-      context: ..
+      context: .
       dockerfile: docker/Dockerfile.ui
     volumes:
       - praison_data:/root/.praison
@@ -32,7 +32,7 @@ services:
   # PraisonAI Chat Service
   chat:
     build:
-      context: ..
+      context: .
       dockerfile: docker/Dockerfile.chat
     volumes:
       - praison_data:/root/.praison
@@ -59,7 +59,7 @@ services:
   # PraisonAI API Service
   api:
     build:
-      context: ..
+      context: .
       dockerfile: docker/Dockerfile
     volumes:
       - praison_data:/root/.praison
@@ -79,7 +79,7 @@ services:
   # PraisonAI Agents Service (standalone)
   agents:
     build:
-      context: ..
+      context: .
       dockerfile: docker/Dockerfile.praisonaiagents
     volumes:
       - praison_data:/root/.praison
