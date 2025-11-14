@@ -74,6 +74,7 @@ services:
     volumes:
       - praison_data:/root/.praison
       - ./src:/app
+      - ./examples:/app/examples:rw
     ports:
       - "8083:8083"
     environment:
@@ -100,6 +101,7 @@ services:
       dockerfile: docker/Dockerfile
     volumes:
       - praison_data:/root/.praison
+      - ./examples:/app/examples:rw
     ports:
       - "9080:8080"
     environment:
