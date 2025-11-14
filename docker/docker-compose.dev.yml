@@ -7,13 +7,13 @@ services:
   # Development UI Service with hot reload
   ui-dev:
     build:
-      context: ..
+      context: .
       dockerfile: docker/Dockerfile.dev
     volumes:
       - praison_data:/root/.praison
-      - ../src:/app/src:rw
-      - ../examples:/app/examples:rw
-      - ../docs:/app/docs:ro
+      - ./src:/app/src:rw
+      - ./examples:/app/examples:rw
+      - ./docs:/app/docs:ro
     ports:
       - "${UI_PORT:-8082}:8082"
     environment:
@@ -37,12 +37,12 @@ services:
   # Development Chat Service
   chat-dev:
     build:
-      context: ..
+      context: .
       dockerfile: docker/Dockerfile.dev
     volumes:
       - praison_data:/root/.praison
-      - ../src:/app/src:rw
-      - ../examples:/app/examples:rw
+      - ./src:/app/src:rw
+      - ./examples:/app/examples:rw
     ports:
       - "${CHAT_PORT:-8083}:8083"
     environment:
@@ -65,12 +65,12 @@ services:
   # Development API Service with hot reload
   api-dev:
     build:
-      context: ..
+      context: .
       dockerfile: docker/Dockerfile.dev
     volumes:
       - praison_data:/root/.praison
-      - ../src:/app/src:rw
-      - ../examples:/app/examples:rw
+      - ./src:/app/src:rw
+      - ./examples:/app/examples:rw
     ports:
       - "${API_PORT:-8080}:8080"
     environment:
@@ -89,13 +89,13 @@ services:
   # Development Jupyter Notebook Service
   jupyter:
     build:
-      context: ..
+      context: .
       dockerfile: docker/Dockerfile.dev
     volumes:
       - praison_data:/root/.praison
-      - ../src:/app/src:rw
-      - ../examples:/app/examples:rw
-      - ../docs:/app/docs:rw
+      - ./src:/app/src:rw
+      - ./examples:/app/examples:rw
+      - ./docs:/app/docs:rw
     ports:
       - "8888:8888"
     environment:
@@ -110,11 +110,11 @@ services:
   # Development Testing Service
   test:
     build:
-      context: ..
+      context: .
       dockerfile: docker/Dockerfile.dev
     volumes:
-      - ../src:/app/src:rw
-      - ../tests:/app/tests:rw
+      - ./src:/app/src:rw
+      - ./tests:/app/tests:rw
       - praison_data:/root/.praison
     environment:
       OPENAI_API_KEY: ${OPENAI_API_KEY}
@@ -175,11 +175,11 @@ services:
   # Development documentation server
   docs:
     build:
-      context: ..
+      context: .
       dockerfile: docker/Dockerfile.dev
     volumes:
-      - ../docs:/app/docs:rw
-      - ../README.md:/app/README.md:ro
+      - ./docs:/app/docs:rw
+      - ./README.md:/app/README.md:ro
     ports:
       - "8000:8000"
     command: sh -c "cd docs && mkdocs serve --dev-addr 0.0.0.0:8000"
