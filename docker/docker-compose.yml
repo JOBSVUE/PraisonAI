@@ -101,6 +101,7 @@ services:
       dockerfile: docker/Dockerfile
     volumes:
       - praison_data:/root/.praison
+      - ./src:/app
       - ./examples:/app/examples:rw
     ports:
       - "9080:8080"
