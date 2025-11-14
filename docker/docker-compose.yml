@@ -14,22 +14,10 @@ services:
         type: bind
         source: ./tools.py
         target: /app/tools.py
-        content:  |
+        content: |
           from duckduckgo_search import DDGS
           
           def search_tool(query: str) -> list:
-              """
-              Perform a web search using DuckDuckGo and return relevant results.
-          
-              Args:
-                  query (str): The search query string to look up information about.
-          
-              Returns:
-                  list: A list of dictionaries containing search results with the following keys:
-                      - title (str): The title of the search result
-                      - url (str): The URL of the search result
-                      - snippet (str): A brief excerpt or description of the search result
-              """
               try:
                   results = []
                   ddgs = DDGS()
