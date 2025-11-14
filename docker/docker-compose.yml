@@ -11,7 +11,7 @@ services:
       - ./src:/app
       - 
         type: bind
-        source: tools.py
+        source: ./tools.py
         target: /app/tools.py
         content:  |
           from duckduckgo_search import DDGS
