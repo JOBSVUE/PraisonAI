@@ -64,7 +64,7 @@ services:
     volumes:
       - praison_data:/root/.praison
     ports:
-      - "8080:8080"
+      - "9080:8080"
     environment:
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       PRAISON_CONFIG_DIR: /root/.praison
