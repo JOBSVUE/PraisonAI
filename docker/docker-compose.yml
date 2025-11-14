@@ -9,6 +9,7 @@ services:
     volumes:
       - praison_data:/root/.praison
       - ./src:/app
+      - ./examples:/app/examples:rw
       - 
         type: bind
         source: ./tools.py
