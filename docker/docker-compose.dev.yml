@@ -15,7 +15,7 @@ services:
       - ./examples:/app/examples:rw
       - ./docs:/app/docs:ro
     ports:
-      - "${UI_PORT:-8082}:8082"
+      - "${UI_PORT:-8182}:8082"
     environment:
       FLASK_ENV: development
       CHAINLIT_PORT: "8082"
@@ -44,7 +44,7 @@ services:
       - ./src:/app/src:rw
       - ./examples:/app/examples:rw
     ports:
-      - "${CHAT_PORT:-8083}:8083"
+      - "${CHAT_PORT:-8183}:8083"
     environment:
       CHAINLIT_PORT: "8083"
       CHAINLIT_HOST: "0.0.0.0"
@@ -72,7 +72,7 @@ services:
       - ./src:/app/src:rw
       - ./examples:/app/examples:rw
     ports:
-      - "${API_PORT:-8080}:8080"
+      - "${API_PORT:-8180}:8080"
     environment:
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       PRAISON_CONFIG_DIR: /root/.praison
@@ -97,7 +97,7 @@ services:
       - ./examples:/app/examples:rw
       - ./docs:/app/docs:rw
     ports:
-      - "8888:8888"
+      - "8188:8888"
     environment:
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       PRAISON_CONFIG_DIR: /root/.praison
@@ -127,34 +127,23 @@ services:
     profiles:
       - test
 
-  # Standalone database for development
+
   database:
     security_opt:
       - "no-new-privileges:true"
     image: postgres:15-alpine
-    environment:
-      POSTGRES_DB: praisonai_dev
-      POSTGRES_USER: praisonai
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-praisonai_dev_pass}
-    volumes:
-   database:
-     image: postgres:15-alpine
      environment:
        POSTGRES_DB: praisonai_dev
        POSTGRES_USER: praisonai
        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-praisonai_dev_pass}
      volumes:
-       - postgres_data:/var/lib/postgresql/data
+       - praison_postgres_data:/var/lib/postgresql/data
      read_only: true
      tmpfs:
        - /tmp
        - /var/tmp
-     ports:
-       - "5432:5432"
-     networks:
-      - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "5132:5432"
     networks:
       - praison_network
     profiles:
@@ -164,9 +153,9 @@ services:
   redis:
     image: redis:7-alpine
     ports:
-      - "6379:6379"
+      - "6179:6379"
     volumes:
-      - redis_data:/data
+      - praison_redis_data:/data
     networks:
       - praison_network
     profiles:
@@ -181,7 +170,7 @@ services:
       - ./docs:/app/docs:rw
       - ./README.md:/app/README.md:ro
     ports:
-      - "8000:8000"
+      - "8100:8000"
     command: sh -c "cd docs && mkdocs serve --dev-addr 0.0.0.0:8000"
     networks:
       - praison_network
@@ -191,9 +180,9 @@ services:
 volumes:
   praison_data:
     driver: local
-  postgres_data:
+  praison_postgres_data:
     driver: local
-  redis_data:
+  praison_redis_data:
     driver: local
 
 networks:
