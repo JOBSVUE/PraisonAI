@@ -126,6 +126,41 @@ services:
     networks:
       - praison_network
 
+
+
+  database:
+    security_opt:
+      - "no-new-privileges:true"
+    image: postgres:15-alpine
+     environment:
+       POSTGRES_DB: praisonai_dev
+       POSTGRES_USER: praisonai
+       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-praisonai_dev_pass}
+     volumes:
+       - praison_postgres_data:/var/lib/postgresql/data
+     read_only: true
+     tmpfs:
+       - /tmp
+       - /var/tmp
+    ports:
+      - "5532:5432"
+    networks:
+      - praison_network
+    profiles:
+      - database
+
+  # Redis for caching and session management
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6679:6379"
+    volumes:
+      - praison_redis_data:/data
+    networks:
+      - praison_network
+    profiles:
+      - cache
+      
 volumes:
   praison_data:
     driver: local
